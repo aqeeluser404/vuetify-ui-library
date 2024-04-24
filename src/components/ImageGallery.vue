@@ -1,4 +1,12 @@
+<script setup>
+    import { defineProps } from 'vue'
 
+    const colorProp = defineProps(['isWithColor'])
+
+    const copyUrl = async (url) => {
+        await navigator.clipboard.writeText(url)
+    }
+</script>
 
 <template>
     <!-- add another v-card to act as a container -->
@@ -13,29 +21,38 @@
                 md="2"
                 lg="1"
             >
-                <v-card>
-                    <!-- image card -->
-                    <v-img
-                        :src="`https://picsum.photos/500/300?images=${n * 5 + 10}`"
-                        :lazy-src="`https://picsum.photos/10/6?images=${n * 5 + 10}`"
-                        aspect-ratio="1"
-                        cover
+                <v-hover
+                    v-slot="{isHovering, props}"
+                >
+                    <v-card
+                        v-bind="props"
+                        :elevation="isHovering ? 6 : 3"
                     >
-                        <!-- loading animation -->
-                        <template v-slot:placeholder>
-                            <v-row
-                                class="fill-height ma-0"
-                                align="center"
-                                justify="center"
-                            >
-                                <v-progress-circular 
-                                    indeterminate
-                                    color="grey-lighten-5"
-                                ></v-progress-circular >
-                            </v-row>
-                        </template>
-                    </v-img>
-                </v-card>
+                        <!-- image card -->
+                        <v-img
+                            :src="`https://picsum.photos/500/300?images=${n * 5 + 10}${colorProp.isWithColor ? '' : '&grayscale'}`"
+                            :lazy-src="`https://picsum.photos/10/6?images=${n * 5 + 10}${colorProp.isWithColor ? '' : '&grayscale'}`"
+                            @click="copyUrl(`https://picsum.photos/500/300?images=${n * 5 + 10}${colorProp.isWithColor ? '' : '&grayscale'}`)"
+                            class="cursor-pointer"
+                            aspect-ratio="1"
+                            cover
+                        >
+                            <!-- loading animation -->
+                            <template v-slot:placeholder>
+                                <v-row
+                                    class="fill-height ma-0"
+                                    align="center"
+                                    justify="center"
+                                >
+                                    <v-progress-circular 
+                                        indeterminate
+                                        color="grey-lighten-5"
+                                    ></v-progress-circular >
+                                </v-row>
+                            </template>
+                        </v-img>
+                    </v-card>
+                </v-hover>
             </v-col>
         </v-row>
     </v-card>
