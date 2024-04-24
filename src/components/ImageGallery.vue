@@ -12,6 +12,30 @@
     <!-- add another v-card to act as a container -->
     <!-- this allows for customization in the form of vuetify classes -->
     <v-card class="mx-5 my-2 pa-3">
+        <!-- new row test -->
+        <v-row 
+            class="mb-3" 
+            align="center"
+        >
+            <v-col 
+                cols="12"
+                align="center"
+            >
+                <div class="text-center">Basic Gallery API</div>
+            </v-col>
+
+            <!-- <v-col 
+                cols="4"
+            >
+                <div class="text-center">Word1</div>
+            </v-col>
+            <v-col 
+                cols="4"
+            >
+                <div class="text-center">Word1</div>
+            </v-col> -->
+
+        </v-row>
         <v-row>
             <!-- last 3 props - media query for mobile -->
             <v-col
